@@ -3,13 +3,13 @@ import { IsQueue } from "../LinkedList/Queue";
 export enum TraversalOrder {
   IN_ORDER,
   PRE_ORDER,
-  POST_ODRER
+  POST_ODRER,
 }
 
 export default class BinarySearchTree<T> {
   readonly value: T;
-  public leftNode: BinarySearchTree<T>|null  = null;
-  public rightNode: BinarySearchTree<T>|null = null;
+  public leftNode: BinarySearchTree<T> | null = null;
+  public rightNode: BinarySearchTree<T> | null = null;
 
   constructor(nodeValue: T) {
     this.value = nodeValue;
@@ -42,10 +42,7 @@ export default class BinarySearchTree<T> {
     return false;
   }
 
-  depthFirstTraversal(
-    iterator: (v: T) => void,
-    order: TraversalOrder
-  ): void {
+  depthFirstTraversal(iterator: (v: T) => void, order: TraversalOrder): void {
     if (order === TraversalOrder.PRE_ORDER) {
       iterator(this.value);
     }
@@ -68,8 +65,8 @@ export default class BinarySearchTree<T> {
     queue: IsQueue<BinarySearchTree<T>>
   ): void {
     queue.queue(this);
-    let node: BinarySearchTree<T>|null;
-    while (node = queue.dequeue()) {
+    let node: BinarySearchTree<T> | null;
+    while ((node = queue.dequeue())) {
       iterator(node);
       if (node.leftNode !== null) {
         queue.queue(node.leftNode);
@@ -80,3 +77,4 @@ export default class BinarySearchTree<T> {
     }
   }
 }
+

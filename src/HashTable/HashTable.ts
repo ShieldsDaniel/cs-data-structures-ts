@@ -1,7 +1,7 @@
 import HashTableNode from "./HashTableNode";
 
 export default class HashTable<K, V> {
-  private buckets: HashTableNode<K, V>[]|null[];
+  private buckets: HashTableNode<K, V>[] | null[];
 
   constructor(size: number) {
     this.buckets = Array(size);
@@ -21,10 +21,10 @@ export default class HashTable<K, V> {
     }
   }
 
-  public get(key: K): V|null {
+  public get(key: K): V | null {
     const hashedKey = this.hashKey(key);
     if (this.buckets[hashedKey]) {
-      let currentNode: HashTableNode<K, V>|null = this.buckets[hashedKey];
+      let currentNode: HashTableNode<K, V> | null = this.buckets[hashedKey];
       while (currentNode) {
         if (currentNode.key === key) {
           return currentNode.value;
@@ -38,7 +38,7 @@ export default class HashTable<K, V> {
   public delete(key: K): void {
     const hashedKey = this.hashKey(key);
     if (this.buckets[hashedKey]) {
-      let currentNode: HashTableNode<K, V>|null = this.buckets[hashedKey];
+      let currentNode: HashTableNode<K, V> | null = this.buckets[hashedKey];
       if (currentNode && currentNode.key === key) {
         this.buckets[hashedKey] = currentNode.next;
       }
@@ -55,7 +55,7 @@ export default class HashTable<K, V> {
   public has(key: K): boolean {
     const hashedKey = this.hashKey(key);
     if (this.buckets[hashedKey]) {
-      let currentNode: HashTableNode<K, V>|null = this.buckets[hashedKey];
+      let currentNode: HashTableNode<K, V> | null = this.buckets[hashedKey];
       while (currentNode) {
         if (currentNode.key === key) {
           return true;
@@ -66,11 +66,8 @@ export default class HashTable<K, V> {
     return false;
   }
 
-  private hasInBucket(
-    hashedKey: number,
-    key: K,
-  ): boolean {
-    let currentNode: HashTableNode<K, V>|null = this.buckets[hashedKey];
+  private hasInBucket(hashedKey: number, key: K): boolean {
+    let currentNode: HashTableNode<K, V> | null = this.buckets[hashedKey];
     while (currentNode) {
       if (currentNode.key === key) {
         return true;
@@ -80,12 +77,8 @@ export default class HashTable<K, V> {
     return false;
   }
 
-  private updateValueInBucket(
-    hashedKey: number,
-    key: K,
-    newValue: V
-  ): void {
-    let currentNode: HashTableNode<K, V>|null = this.buckets[hashedKey];
+  private updateValueInBucket(hashedKey: number, key: K, newValue: V): void {
+    let currentNode: HashTableNode<K, V> | null = this.buckets[hashedKey];
     while (currentNode) {
       if (currentNode.key === key) {
         currentNode.value = newValue;
